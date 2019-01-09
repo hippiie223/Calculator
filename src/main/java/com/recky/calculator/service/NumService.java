@@ -11,4 +11,6 @@ public interface NumService {
     public String getMultiplyResult(String s1, String s2);
 
     public String getDivideResult(String s1, String s2);
+
+    public String getIncomeTax(String salary, String deduction);
 }
