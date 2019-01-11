@@ -1,5 +1,6 @@
 package com.recky.calculator.controller;
 
+import com.recky.calculator.common.MyUtils;
 import com.recky.calculator.service.impl.NumServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,5 +38,15 @@ public class NumCalculatorController {
     @GetMapping(path = "/divide")
     public String divide(@RequestParam String s1, @RequestParam String s2) {
         return numService.getDivideResult(s1, s2);
+    }
+
+    @GetMapping(path = "/expression")
+    public String calculate(@RequestParam String expression) {
+        Double result = 0.0;
+        result = numService.prepareParam(expression);
+        if (result != null) {
+            return String.valueOf(MyUtils.formatResult(String.format("%." + MyUtils.RESULT_DECIMAL_MAX_LENGTH + "f", result)));
+        }
+        return "";
     }
 }
